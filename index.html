@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="login-container">
+    <h1>Sign In</h1>
+    <form id="loginForm" action="auth/login.php" method="POST">
+      <input type="email" id="email" name="email" placeholder="Email" required>
+      <input type="password" id="password" name="password" placeholder="Password" required>
+      <button type="submit">Login</button>
+      <p id="validationMessage" class="validation-message"></p>
+    </form>
+  </div>
+
+  <script>
+    // Frontend Validation Script
+    const loginForm = document.getElementById("loginForm");
+    const validationMessage = document.getElementById("validationMessage");
+
+    loginForm.addEventListener("submit", function (e) {
+      const email = document.getElementById("email").value;
+      const isStudent = email.endsWith("@g.bracu.ac.bd");
+      const isFaculty = email.endsWith("@bracu.ac.bd");
+
+      if (!isStudent && !isFaculty) {
+        e.preventDefault();
+        validationMessage.textContent =
+          "Invalid email domain. Use @g.bracu.ac.bd for students or @bracu.ac.bd for faculty.";
+      }
+    });
+  </script>
+</body>
+</html>
